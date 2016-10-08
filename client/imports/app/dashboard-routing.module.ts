@@ -5,12 +5,28 @@ import {NewAccountComponent} from './new-account.component.ts'
 import {TeamListComponent} from "./team-list.component";
 import {ParticipantListComponent} from "./participant-list.component";
 import {PlannerComponent} from "./planner.component";
+import {DashboardComponent} from "./dashboard.component";
 @NgModule({
     imports: [
-        RouterModule.forRoot([
-            {path:'dashboard/participants',component:ParticipantListComponent},
-            {path:'dashboard/teams/..',component:TeamListComponent,pathMatch:'prefix'},
-            {path:'dashboard/planner',component:PlannerComponent}
+        RouterModule.forChild([
+            {
+                path:'dashboard',
+                component:DashboardComponent,
+                children:[
+                    {
+                        path:'participants',
+                        component:ParticipantListComponent
+                    },
+                    {
+                        path:'teams',
+                        component:TeamListComponent
+                    },
+                    {
+                        path:'planner',
+                        component:PlannerComponent
+                    }
+                ]
+            },
         ])
     ],
     exports: [
