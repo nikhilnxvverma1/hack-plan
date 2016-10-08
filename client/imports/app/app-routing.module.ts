@@ -6,7 +6,7 @@ import {DashboardComponent} from "./dashboard.component";
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: '',  component: SignInComponent },
+      { path: '',  component: SignInComponent},
       { path: 'signUp',  component: NewAccountComponent },
       { path: 'dashboard', component: DashboardComponent}
     ])
