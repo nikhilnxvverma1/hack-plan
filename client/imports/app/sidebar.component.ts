@@ -1,12 +1,12 @@
 import { Component, Directive, Output, EventEmitter } from '@angular/core';
-import template from './template/dashboard.component.html';
+import template from './template/sidebar.component.html';
 
 
 @Component({
-    selector: 'dashboard',
+    selector: 'sidebar',
     template
 })
-export class DashboardComponent {
+export class SidebarComponent {
 
     constructor(){
     }

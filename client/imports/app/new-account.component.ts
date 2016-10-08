@@ -1,6 +1,6 @@
 import { Component, Directive, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import template from './new-account.component.html';
+import template from './template/new-account.component.html';
 
 
 @Component({

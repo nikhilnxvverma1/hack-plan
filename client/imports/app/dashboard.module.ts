@@ -5,21 +5,16 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule }  from './app-routing.module';
 import {SignInComponent} from './sign-in.component';
 import {NewAccountComponent} from './new-account.component';
-import {DashboardModule} from './dashboard.module'
+import {DashboardRoutingModule} from "./dashboard-routing.module";
+import {DashboardComponent} from "./dashboard.component";
 
 @NgModule({
     imports: [
         BrowserModule,
-        AppRoutingModule,
-        DashboardModule
+        DashboardRoutingModule
     ],
     declarations: [
-        AppComponent,
-        SignInComponent,
-        NewAccountComponent
-    ],
-    bootstrap: [
-        AppComponent
+        DashboardComponent
     ]
 })
-export class AppModule {}
+export class DashboardModule {}
