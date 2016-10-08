@@ -1,16 +1,28 @@
-<h1>Sign in</h1>
-<div class="row">
-    <div class="col s12 m8 l4">
+<div class="col s4 offset-s4">
+    <h1 class="whiteDrop">HackPlan</h1>
+    <div>
+        <form [formGroup]="signinForm">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input formControlName="username" placeholder="Enter Username Here.." id="username" type="text" class="validate">
+                    <label class="active" for="username">Username</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input formControlName="password" placeholder="Enter Password Here.." id="password" type="password" class="validate">
+                    <label class="active" for="password">Password</label>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="input-field col s6">
+                    <button (click)="login()" class="btn waves-effect waves-light">Submit</button>
+                </div>
+                <div class="input-field col s6">
+                    <button (click)="goToSignUp()" class="btn waves-effect waves-light">Create Account</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="input-field col s6 m3">
-          <input placeholder="Placeholder" id="username" type="text" class="validate">
-        <label for="username">First Name</label>
-    </div>
-    <div class="input-field col s12 m3">
-        <input id="password" type="password" class="validate">
-        <label for="password">Password</label>
-    </div>
-    <a routerLink='/dashboard' class="waves-effect waves-light btn">Login</a>
-    <a routerLink='/signUp' class="waves-effect waves-light btn">Create Account</a>
 </div>

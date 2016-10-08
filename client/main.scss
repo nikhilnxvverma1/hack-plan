@@ -1,5 +1,22 @@
 @import "./materialize/materialize";
 
+//----Ujjwal start------
+.whiteDrop{
+  color: white;
+  text-shadow: 2px 2px rgba(0,0,0,0.3)
+}
+body{
+  color:white;
+}
+body{
+  /*background-image: url('/images/calendar.jpg');*/
+  /*background-size: cover;*/
+  /*background-repeat:no-repeat;*/
+  background-color: #404550;
+  /*background-blend-mode: multiply;*/
+}
+
+//----Ujjwal end------
 
 #header{
   height:50px;

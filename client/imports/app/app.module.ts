@@ -6,10 +6,13 @@ import { AppRoutingModule }  from './app-routing.module';
 import {SignInComponent} from './sign-in.component';
 import {NewAccountComponent} from './new-account.component';
 import {DashboardModule} from './dashboard.module'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
         DashboardModule
     ],
