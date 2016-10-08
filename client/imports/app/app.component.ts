@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Directive, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-// import Parties from '../../both/collections/parties.collection';
+import { RouterModule} from '@angular/router';
+import {SignInComponent} from './sign-in.component';
 import template from './app.component.html';
-
 
 @Component({
     selector: 'app',
-    styleUrls:['../../css/style.css'],
+    styleUrls:['app.component.css'],
     template
 })
 export class AppComponent {    
