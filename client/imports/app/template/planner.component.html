@@ -10,3 +10,10 @@
     </div>
 
 </div>
+
+
+<div
+        *ngFor="let participant of project.participants"
+        class="participant-column" [style.height]="offset+eventPlan.duration*fixedStep+'px'">
+{{participant.name}}
+</div>

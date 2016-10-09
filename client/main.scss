@@ -76,6 +76,7 @@ body{
   margin-top:-50px;
   width:100px;
   background:#F1F1F1;
+  display: inline-block;
 }
 
 .hour-marking{
@@ -95,5 +96,9 @@ body{
 }
 
 .participant-column{
-
+  position: relative;
+  margin-top:-50px;
+  border-right:3px solid #F1F1F1;
+  width:300px;
+  display: inline-block;
 }
