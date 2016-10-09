@@ -22,6 +22,7 @@ export class PlannerComponent {
     project=dummyProject;
     hours:number[];
     trackY:number;
+    trackedParticipant=null;
     trackedTask=null;
     topHandle=false;
 
@@ -36,10 +37,11 @@ export class PlannerComponent {
         this.showTaskList=true;
     }
 
-    handleDown(event:MouseEvent,top:boolean,task){
+    handleDown(event:MouseEvent,top:boolean,task,participant){
 
         this.trackY=event.clientY;
         this.trackedTask=task;
+        this.trackedParticipant=participant;
         this.topHandle=top;
         console.log("handle down "+this.trackY);
     }
@@ -59,7 +61,14 @@ export class PlannerComponent {
                     var fraction = (yInHourView / totalHeight) * this.eventPlan.duration;
                     console.log("task start " + this.trackedTask.start + " new " + fraction);
                     if(this.trackedTask.end-fraction>0.5){
-                        this.trackedTask.start = fraction;
+                        if (this.isStartOfTaskMakingOverlapWithOtherTasks(this.trackedParticipant,this.trackedTask)){
+
+                            if (fraction>this.trackedTask.start) {//allow increasing start time
+                                this.trackedTask.start = fraction;
+                            }
+                        }else{
+                            this.trackedTask.start = fraction;
+                        }
                     }
 
                 } else {
@@ -70,6 +79,7 @@ export class PlannerComponent {
                     console.log("task start " + this.trackedTask.end + " new " + fraction);
                     if (fraction-this.trackedTask.start>0.5) {
                         this.trackedTask.end = fraction;
+                        this.pushTasksDownIfOverlapping(this.trackedParticipant,this.trackedTask);
                     }
                 }
             }
@@ -81,6 +91,53 @@ export class PlannerComponent {
 
     handleUp(event:MouseEvent){
         this.trackedTask=null;
+        this.trackedParticipant=null;
         console.log("handle up "+top);
+    }
+
+    pushTasksDownIfOverlapping(participant,task){
+        var closestOverlappingTask=null;
+        for(var i=0;i<participant.tasks.length;i++ ){
+            var currentTask=participant.tasks[i];
+            if(currentTask!=task){
+                if(currentTask.start>=task.start &&currentTask.start<=task.end){
+                    if (closestOverlappingTask==null||currentTask.start<closestOverlappingTask.start) {
+                        closestOverlappingTask = currentTask;
+                    }
+
+                }
+            }
+        }
+
+        if(closestOverlappingTask!=null){
+            //create a list of all task below (and including) closestOverlappingTask
+            var tasksToPushDown=[];
+            tasksToPushDown.push(closestOverlappingTask);
+            for(var i=0;i<participant.tasks.length;i++ ){
+                var currentTask=participant.tasks[i];
+                if(currentTask!=closestOverlappingTask && currentTask!=task){
+                    tasksToPushDown.push(currentTask);
+                }
+            }
+
+            var pushDownBy= task.end-closestOverlappingTask.start+0.1; //little gap
+
+            for (var i=0;i<tasksToPushDown.length;i++){
+                tasksToPushDown[i].start=tasksToPushDown[i].start+pushDownBy;
+                tasksToPushDown[i].end=tasksToPushDown[i].end+pushDownBy;
+            }
+        }
+    }
+
+    isStartOfTaskMakingOverlapWithOtherTasks(participant,task):boolean{
+        for(var i=0;i<participant.tasks.length;i++ ){
+            var currentTask=participant.tasks[i];
+            if(currentTask!=task){
+                if(task.start>=currentTask.start && (task.start - currentTask.end)<=0.1){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

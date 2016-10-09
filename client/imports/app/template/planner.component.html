@@ -16,6 +16,7 @@
         *ngFor="let participant of project.participants"
         (mousemove)="handleDrag($event)"
         (mouseup)="handleUp($event)"
+        (dblclick)="createTaskBlock()"
         class="participant-column" [style.height]="offset+eventPlan.duration*fixedStep+'px'">
 {{participant.name}}
     <div
@@ -25,13 +26,13 @@
             [style.top]="offset+task.start*fixedStep+'px'"
             [style.height]="(task.end-task.start)*fixedStep+'px'">
         <div class="task-handle"
-             (mousedown)="handleDown($event,true,task)">
+             (mousedown)="handleDown($event,true,task,participant)">
 
         </div>
         <h4 (click)="doShowTaskList(task)">{{task.name}}</h4>
         <h6>{{task.completed}}/{{task.taskList.length}} completed</h6>
         <div class="task-handle stuck-to-bottom"
-             (mousedown)="handleDown($event,false,task)">
+             (mousedown)="handleDown($event,false,task,participant)">
 
         </div>
     </div>
