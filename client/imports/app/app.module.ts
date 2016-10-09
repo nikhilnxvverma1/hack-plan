@@ -8,6 +8,8 @@ import {NewAccountComponent} from './new-account.component';
 import {DashboardModule} from './dashboard.module'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertComponent} from "./alert.component";
+import 'materialize-css';
+import 'angular2-materialize';
 
 @NgModule({
     imports: [

@@ -13,6 +13,5 @@ export class AlertComponent implements OnInit{
     'text': 'This is some text'
     }
     ngOnInit(){
-        //$('.modal').leanModal();
     }
 }
