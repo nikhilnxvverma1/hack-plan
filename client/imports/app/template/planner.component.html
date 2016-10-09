@@ -18,21 +18,24 @@
         (mouseup)="handleUp($event)"
         (dblclick)="createTaskBlock($event,participant)"
         class="participant-column" [style.height]="offset+eventPlan.duration*fixedStep+'px'">
-{{participant.name}}
+        {{participant.name}}
+    <!--Second argument useless in mouse down-->
     <div
             *ngFor="let task of participant.tasks"
-            class="task-block"
-
+            class="task-block z-depth-1"
             [style.top]="offset+task.start*fixedStep+'px'"
             [style.height]="(task.end-task.start)*fixedStep+'px'">
+        <div class="back-handler"
+             (mousedown)="handleDown($event,false,false,task,participant)"
+        ></div>
         <div class="task-handle"
-             (mousedown)="handleDown($event,true,task,participant)">
+             (mousedown)="handleDown($event,true,true,task,participant)">
 
         </div>
         <h4 (click)="doShowTaskList(task)">{{task.name}}</h4>
         <h6>{{task.completed}}/{{task.taskList.length}} completed</h6>
         <div class="task-handle stuck-to-bottom"
-             (mousedown)="handleDown($event,false,task,participant)">
+             (mousedown)="handleDown($event,false,true,task,participant)">
 
         </div>
     </div>

@@ -109,17 +109,26 @@ body{
   position: absolute;
   width:250px;
   left:25px;
-  background: #471D46;
-  color:white;
+  background: #ededed;
+  color:black;
   text-align: center;
   overflow: hidden;
+  cursor: move;
+
+  .back-handler{
+    position: absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+  }
 }
 
 .task-handle{
   position: absolute;
   width:250px;
-  height:15px;
-  background: #bc45ba;
+  height:5px;
+  background: #c5cac7;
   z-index: 5;
   cursor:ns-resize;
 }
@@ -127,10 +136,12 @@ body{
 .task-block h4{
   font-size:1.5em;
   cursor: pointer;
+  z-index: 4;
+  position: relative;
 }
 
 .task-block h6{
-  color: #f3f3f3;
+  color: #a1a1a1;
 }
 
 .full-cover{

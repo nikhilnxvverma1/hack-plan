@@ -1,16 +1,19 @@
-import { Component, Directive, Output, EventEmitter,ViewChild } from '@angular/core';
+import { Component, Directive, Output,OnInit, EventEmitter,ViewChild } from '@angular/core';
 import template from './template/planner.component.html';
 import { dummyEvent } from '../../../both/dummy/dummy-data';
 import {TimeFromHourNumber} from "./pipe/time-from-hour-no.pipe";
 import {dummyProject} from "../../../both/dummy/dummy-data";
 import {TaskListComponent} from "./task-list.component";
-
+//import {Planner} from '../../../both/collections/planner.collection';
+import {Participants} from "../../../both/collections/participants.collection";
+import { MongoObservable } from 'meteor-rxjs';
+import { Meteor } from 'meteor/meteor';
 @Component({
     selector: 'planner',
     template
     //templateUrl:'./template/planner.component.html'
 })
-export class PlannerComponent {
+export class PlannerComponent implements OnInit{
 
     showTaskList=false;
 
@@ -19,17 +22,27 @@ export class PlannerComponent {
     offset=80;
 
     eventPlan=dummyEvent;
-    project=dummyProject;
+    //project=dummyProject;
+    project=null;
     hours:number[];
     trackY:number;
     trackedParticipant=null;
     trackedTask=null;
     topHandle=false;
+    usingHandle=false;
 
     @ViewChild(TaskListComponent) taskList:TaskListComponent;
 
     constructor(){
         this.hours=Array(this.eventPlan.duration).fill().map((x,i)=>i);
+    }
+
+    ngOnInit(){
+        //Planner.insert(dummyProject);
+        var Planner=new MongoObservable.Collection('Planner');
+        Planner.insert(dummyProject);
+        console.log(" inserted document");
+        this.project=Planner.find();
     }
 
     doShowTaskList(task){
@@ -61,12 +74,13 @@ export class PlannerComponent {
         this.pushTasksDownIfOverlapping(participant,newTask);
     }
 
-    handleDown(event:MouseEvent,top:boolean,task,participant){
+    handleDown(event:MouseEvent,top:boolean,usingHandle:boolean,task,participant){
 
         this.trackY=event.clientY;
         this.trackedTask=task;
         this.trackedParticipant=participant;
         this.topHandle=top;
+        this.usingHandle=usingHandle;
         console.log("handle down "+this.trackY);
     }
 
@@ -77,34 +91,61 @@ export class PlannerComponent {
 
 
             if (this.trackedTask!=null) {
-                if (this.topHandle) {
-                    var currentStart = this.trackedTask.start * this.fixedStep;
-                    var dy = event.clientY - this.trackY;
-                    console.log("dy " + dy);
-                    var yInHourView = (currentStart + dy);
-                    var fraction = (yInHourView / totalHeight) * this.eventPlan.duration;
-                    console.log("task start " + this.trackedTask.start + " new " + fraction);
-                    if(this.trackedTask.end-fraction>0.5){
-                        if (this.isStartOfTaskMakingOverlapWithOtherTasks(this.trackedParticipant,this.trackedTask)){
 
-                            if (fraction>this.trackedTask.start) {//allow increasing start time
+
+                if (this.usingHandle) {
+                    if (this.topHandle) {
+                        var currentStart = this.trackedTask.start * this.fixedStep;
+                        var dy = event.clientY - this.trackY;
+                        console.log("dy " + dy);
+                        var yInHourView = (currentStart + dy);
+                        var fraction = (yInHourView / totalHeight) * this.eventPlan.duration;
+                        console.log("task start " + this.trackedTask.start + " new " + fraction);
+                        if (this.trackedTask.end - fraction > 0.5) {
+                            if (this.isStartOfTaskMakingOverlapWithOtherTasks(this.trackedParticipant, this.trackedTask)) {
+
+                                if (fraction > this.trackedTask.start) {//allow increasing start time
+                                    this.trackedTask.start = fraction;
+                                }
+                            } else {
                                 this.trackedTask.start = fraction;
                             }
-                        }else{
-                            this.trackedTask.start = fraction;
+                        }
+
+                    } else {
+                        var currentEnd = this.trackedTask.end * this.fixedStep;
+                        var dy = event.clientY - this.trackY;
+                        var yInHourView = (currentEnd + dy);
+                        var fraction = (yInHourView / totalHeight) * this.eventPlan.duration;
+                        console.log("task start " + this.trackedTask.end + " new " + fraction);
+                        if (fraction - this.trackedTask.start > 0.5) {
+                            this.trackedTask.end = fraction;
+                            this.pushTasksDownIfOverlapping(this.trackedParticipant, this.trackedTask);
                         }
                     }
-
-                } else {
-                    var currentEnd = this.trackedTask.end * this.fixedStep;
+                }else{
                     var dy = event.clientY - this.trackY;
-                    var yInHourView = (currentEnd + dy);
-                    var fraction = (yInHourView / totalHeight) * this.eventPlan.duration;
-                    console.log("task start " + this.trackedTask.end + " new " + fraction);
-                    if (fraction-this.trackedTask.start>0.5) {
-                        this.trackedTask.end = fraction;
-                        this.pushTasksDownIfOverlapping(this.trackedParticipant,this.trackedTask);
+                    var unitsToShift=(dy * this.eventPlan.duration)/totalHeight;
+                    console.log("units to shift "+unitsToShift);
+
+                    var newStart = this.trackedTask.start+unitsToShift;
+                    var newEnd = this.trackedTask.end+unitsToShift;
+
+                    if (this.isStartOfTaskMakingOverlapWithOtherTasks(this.trackedParticipant, this.trackedTask)) {
+
+                        if (newStart > this.trackedTask.start) {//allow increasing start time
+                            this.trackedTask.start= newStart;
+                            this.trackedTask.end= newEnd;
+                        }
+                    } else {
+                        this.trackedTask.start= newStart;
+                        this.trackedTask.end= newEnd;
                     }
+
+
+
+                    this.pushTasksDownIfOverlapping(this.trackedParticipant, this.trackedTask);
+
                 }
             }
 
