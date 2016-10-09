@@ -12,7 +12,7 @@ export const dummyProject={
             name:"Nikhil Verma",
             tasks:[
                 {
-                    name:"homepage",
+                    name:"Homepage",
                     start:0.5,
                     end:3,
                     completion:-1,

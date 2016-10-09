@@ -1,14 +1,18 @@
-<div *ngIf="task!=null" class="full-cover within-dashboard">
+<div *ngIf="task!=null" class="full-cover within-dashboard" id="task-list-cover">
     <img class="close-button-for-full-covers"
          src="images/close.svg"
          (click)="closeTaskListEvent.emit(task)"
     />
-    <h1>{{task.name}}</h1>
+    <div class="task-name-container">
+        <input placeholder="Task Name" id="task-name-in-cover" [(ngModel)]="task.name" type="text">
+        <!--<label for="task-name-in-cover">Name</label>-->
+    </div>
     <ul>
         <li
-                *ngFor="let taskItem of task.taskList"
+                *ngFor="let taskItem of task.taskList; let index = index;"
         >
-            {{taskItem.name}}
+            <input type="checkbox" [attr.id]="'taskNumber'+index" [(ngModel)]="taskItem.done"/>
+            <label [class.task-completed]="taskItem.done" [attr.for]="'taskNumber'+index">{{taskItem.name}}</label>
         </li>
     </ul>
 </div>

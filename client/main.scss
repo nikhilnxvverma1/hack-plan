@@ -115,8 +115,18 @@ body{
   overflow: hidden;
 }
 
+.task-handle{
+  position: absolute;
+  width:250px;
+  height:15px;
+  background: #bc45ba;
+  z-index: 5;
+  cursor:ns-resize;
+}
+
 .task-block h4{
   font-size:1.5em;
+  cursor: pointer;
 }
 
 .task-block h6{
@@ -147,3 +157,24 @@ body{
   top:30px;
 }
 
+.task-completed{
+  text-decoration: line-through;
+}
+
+#task-list-cover{
+  .task-name-container{
+    margin-left: 70px;
+    margin-top: 70px;
+  }
+  ul{
+    margin-left: 100px;
+    margin-top: 30px;
+  }
+  ul li{
+    margin-bottom:20px;
+  }
+}
+
+.stuck-to-bottom{
+  bottom:0px;
+}

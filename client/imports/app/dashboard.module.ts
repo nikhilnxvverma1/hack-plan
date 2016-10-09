@@ -15,10 +15,13 @@ import {PlannerComponent} from "./planner.component";
 import {TeamListComponent} from "./team-list.component";
 import {TimeFromHourNumber} from "./pipe/time-from-hour-no.pipe";
 import {TaskListComponent} from "./task-list.component";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
         DashboardRoutingModule
     ],
     declarations: [
