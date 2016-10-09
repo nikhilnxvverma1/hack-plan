@@ -16,7 +16,7 @@
         *ngFor="let participant of project.participants"
         (mousemove)="handleDrag($event)"
         (mouseup)="handleUp($event)"
-        (dblclick)="createTaskBlock()"
+        (dblclick)="createTaskBlock($event,participant)"
         class="participant-column" [style.height]="offset+eventPlan.duration*fixedStep+'px'">
 {{participant.name}}
     <div

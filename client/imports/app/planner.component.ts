@@ -37,6 +37,30 @@ export class PlannerComponent {
         this.showTaskList=true;
     }
 
+    createTaskBlock(event:MouseEvent,participant){
+        var totalHeight=this.eventPlan.duration*this.fixedStep;
+        var yInHourView = event.clientY-this.offset-this.headerHeight
+        var start= (yInHourView / totalHeight) * this.eventPlan.duration;
+
+        var end=start + 1;
+        var newTask={
+            name:"New Task",
+            start:start,
+            end:end,
+            completion:-1,
+            completed:0,
+            taskList:[
+                {
+                    name:"Complete this task",
+                    done:false
+                }
+            ]
+
+        };
+        participant.tasks.push(newTask);
+        this.pushTasksDownIfOverlapping(participant,newTask);
+    }
+
     handleDown(event:MouseEvent,top:boolean,task,participant){
 
         this.trackY=event.clientY;
@@ -115,7 +139,7 @@ export class PlannerComponent {
             tasksToPushDown.push(closestOverlappingTask);
             for(var i=0;i<participant.tasks.length;i++ ){
                 var currentTask=participant.tasks[i];
-                if(currentTask!=closestOverlappingTask && currentTask!=task){
+                if(currentTask!=closestOverlappingTask && currentTask!=task &&currentTask.start>closestOverlappingTask.start){
                     tasksToPushDown.push(currentTask);
                 }
             }
