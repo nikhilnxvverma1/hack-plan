@@ -64,6 +64,7 @@ body{
   padding-top:50px;
   padding-left:50px;
   background: #fafafa;
+  overflow-y: scroll;
 }
 
 .active-section{
@@ -73,10 +74,10 @@ body{
 
 #hour-bar{
   position: relative;
-  margin-top:-50px;
   width:100px;
   background:#F1F1F1;
   display: inline-block;
+  float: left;
 }
 
 .hour-marking{
@@ -97,8 +98,27 @@ body{
 
 .participant-column{
   position: relative;
-  margin-top:-50px;
+  //margin-top:-50px;
   border-right:3px solid #F1F1F1;
   width:300px;
   display: inline-block;
+  text-align: center;
+}
+
+.task-block{
+  position: absolute;
+  width:250px;
+  left:25px;
+  background: #471D46;
+  color:white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.task-block h4{
+  font-size:1.5em;
+}
+
+.task-block h6{
+  color: #f3f3f3;
 }

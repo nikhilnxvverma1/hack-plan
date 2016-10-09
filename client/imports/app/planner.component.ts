@@ -12,7 +12,7 @@ import {dummyProject} from "../../../both/dummy/dummy-data";
 export class PlannerComponent {
 
     fixedStep=75;//30px means one hour
-    offset=100;
+    offset=80;
 
     eventPlan=dummyEvent;
     project=dummyProject;
@@ -21,9 +21,3 @@ export class PlannerComponent {
         this.hours=Array(this.eventPlan.duration).fill().map((x,i)=>i);
     }
 }
-
-//class Event{
-//    name:string;
-//    venue:string;
-//
-//}

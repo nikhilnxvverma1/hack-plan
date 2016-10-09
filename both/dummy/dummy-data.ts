@@ -16,6 +16,7 @@ export const dummyProject={
                     start:0.5,
                     end:3,
                     completion:-1,
+                    completed:2,
                     taskList:[
                         {
                             name:"Setup configurations for cdn",
@@ -40,6 +41,7 @@ export const dummyProject={
                     start:3.5,
                     end:5,
                     completion:-1,
+                    completed:1,
                     taskList:[
                         {
                             name:"Description of a task # 1",
@@ -64,6 +66,7 @@ export const dummyProject={
                     start:6,
                     end:8,
                     completion:-1,
+                    completed:0,
                     taskList:[
                         {
                             name:"Description of a task # 1",
@@ -94,6 +97,7 @@ export const dummyProject={
                     start:1.5,
                     end:3.5,
                     completion:-1,
+                    completed:2,
                     taskList:[
                         {
                             name:"Setup configurations for cdn",
@@ -118,6 +122,7 @@ export const dummyProject={
                     start:4,
                     end:5.5,
                     completion:-1,
+                    completed:1,
                     taskList:[
                         {
                             name:"Description of a task # 1",
@@ -142,6 +147,7 @@ export const dummyProject={
                     start:6,
                     end:8.5,
                     completion:-1,
+                    completed:0,
                     taskList:[
                         {
                             name:"Description of a task # 1",
@@ -172,6 +178,7 @@ export const dummyProject={
                     start:0.5,
                     end:1,
                     completion:-1,
+                    completed:2,
                     taskList:[
                         {
                             name:"Setup configurations for cdn",
@@ -196,6 +203,7 @@ export const dummyProject={
                     start:2,
                     end:4.5,
                     completion:-1,
+                    completed:1,
                     taskList:[
                         {
                             name:"Description of a task # 1",
@@ -220,6 +228,7 @@ export const dummyProject={
                     start:5.5,
                     end:8.5,
                     completion:-1,
+                    completed:0,
                     taskList:[
                         {
                             name:"Description of a task # 1",

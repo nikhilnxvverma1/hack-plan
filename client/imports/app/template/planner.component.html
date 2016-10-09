@@ -3,10 +3,10 @@
     <div
             *ngFor="let hour of hours"
             class="hour-marking" [style.top]="offset+hour*fixedStep+'px'">
-            <div class="marking-text">
-                {{ hour| timeFromHourNo:9}}
-            </div>
-            <div class="marking-line">-</div><!--TODO replace with an svg-->
+        <div class="marking-text">
+            {{ hour| timeFromHourNo:9}}
+        </div>
+        <div class="marking-line">-</div><!--TODO replace with an svg-->
     </div>
 
 </div>
@@ -16,4 +16,13 @@
         *ngFor="let participant of project.participants"
         class="participant-column" [style.height]="offset+eventPlan.duration*fixedStep+'px'">
 {{participant.name}}
+    <div
+            *ngFor="let task of participant.tasks"
+            class="task-block"
+            [style.top]="offset+task.start*fixedStep+'px'"
+            [style.height]="(task.end-task.start)*fixedStep+'px'">
+        <h4>{{task.name}}</h4>
+        <h6>{{task.completed}}/{{task.taskList.length}} completed</h6>
+    </div>
+
 </div>
