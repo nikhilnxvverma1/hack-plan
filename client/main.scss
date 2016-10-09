@@ -122,3 +122,28 @@ body{
 .task-block h6{
   color: #f3f3f3;
 }
+
+.full-cover{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+  top:50px;
+  overflow-y: scroll;
+  background:#FDFDFD;
+  z-index: 10;
+}
+
+.within-dashboard{
+  left:50px;
+}
+
+.stuck-to-left{
+  left:0px;
+}
+
+.close-button-for-full-covers{
+  position: absolute;
+  right:30px;
+  top:30px;
+}
+

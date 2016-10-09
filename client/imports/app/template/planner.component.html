@@ -19,7 +19,7 @@
     <div
             *ngFor="let task of participant.tasks"
             class="task-block"
-            (click)="doShowTaskList()"
+            (click)="doShowTaskList(task)"
             [style.top]="offset+task.start*fixedStep+'px'"
             [style.height]="(task.end-task.start)*fixedStep+'px'">
         <h4>{{task.name}}</h4>
@@ -28,4 +28,6 @@
 
 </div>
 
-<task-list [style.display]="showTaskList?'block':'none'"></task-list>
+<task-list
+        (closeTaskList)="showTaskList=false"
+        [style.display]="showTaskList?'block':'none'"></task-list>

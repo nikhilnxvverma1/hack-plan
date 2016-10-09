@@ -1,1 +1,14 @@
-<h1>task list</h1>
+<div *ngIf="task!=null" class="full-cover within-dashboard">
+    <img class="close-button-for-full-covers"
+         src="images/close.svg"
+         (click)="closeTaskListEvent.emit(task)"
+    />
+    <h1>{{task.name}}</h1>
+    <ul>
+        <li
+                *ngFor="let taskItem of task.taskList"
+        >
+            {{taskItem.name}}
+        </li>
+    </ul>
+</div>
