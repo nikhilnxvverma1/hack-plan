@@ -61,7 +61,39 @@ body{
   left:0px;
   height:100%;
   width:100%;
-  padding-top:70px;
-  padding-left:70px;
+  padding-top:50px;
+  padding-left:50px;
   background: #fafafa;
+}
+
+.active-section{
+  border-left: 5px solid;
+  border-color: #EC3673;
+}
+
+#hour-bar{
+  position: relative;
+  margin-top:-50px;
+  width:100px;
+  background:#F1F1F1;
+}
+
+.hour-marking{
+  position:absolute;
+  right:0px;
+
+}
+
+.marking-text{
+  margin-right: 20px;
+  display: inline;
+}
+
+.marking-line{
+  //border-right:2px solid black;
+  display: inline;
+}
+
+.participant-column{
+
 }

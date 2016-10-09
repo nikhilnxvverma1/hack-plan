@@ -1,1 +1,12 @@
-<h1>planner : {{eventPlan.name}}</h1>
+<div id="hour-bar" [style.height]="offset+eventPlan.duration*fixedStep+'px'">
+
+    <div
+            *ngFor="let hour of hours"
+            class="hour-marking" [style.top]="offset+hour*fixedStep+'px'">
+            <div class="marking-text">
+                {{ hour| timeFromHourNo:9}}
+            </div>
+            <div class="marking-line">-</div><!--TODO replace with an svg-->
+    </div>
+
+</div>

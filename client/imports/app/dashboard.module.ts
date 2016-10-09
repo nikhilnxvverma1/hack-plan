@@ -13,6 +13,7 @@ import {ParticipantListComponent} from "./participant-list.component";
 import {TeamComponent} from "./team.component";
 import {PlannerComponent} from "./planner.component";
 import {TeamListComponent} from "./team-list.component";
+import {TimeFromHourNumber} from "./pipe/time-from-hour-no.pipe";
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {TeamListComponent} from "./team-list.component";
         SidebarComponent,
         ParticipantListComponent,
         TeamListComponent,
-        PlannerComponent
+        PlannerComponent,
+        TimeFromHourNumber
     ]
 })
 export class DashboardModule {}
