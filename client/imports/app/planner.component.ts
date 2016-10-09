@@ -11,6 +11,8 @@ import {dummyProject} from "../../../both/dummy/dummy-data";
 })
 export class PlannerComponent {
 
+    showTaskList=false;
+
     fixedStep=75;//30px means one hour
     offset=80;
 
@@ -19,5 +21,10 @@ export class PlannerComponent {
     hours:number[];
     constructor(){
         this.hours=Array(this.eventPlan.duration).fill().map((x,i)=>i);
+    }
+
+    doShowTaskList(){
+        console.log("toggline task list form");
+        this.showTaskList=!this.showTaskList;
     }
 }
