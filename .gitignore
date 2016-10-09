@@ -2,4 +2,8 @@ node_modules/
 .meteor/local
 npm-debug.log
 typings
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/watcherTasks.xml
 watcherTasks.xml
