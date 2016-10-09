@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertComponent} from "./alert.component";
 import 'materialize-css';
 import 'angular2-materialize';
+import {MaterializeDirective} from "angular2-materialize";
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import 'angular2-materialize';
         AppComponent,
         SignInComponent,
         NewAccountComponent,
-        AlertComponent
+        AlertComponent,
+        MaterializeDirective
     ],
     bootstrap: [
         AppComponent
