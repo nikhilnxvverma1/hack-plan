@@ -7,6 +7,7 @@ import {SignInComponent} from './sign-in.component';
 import {NewAccountComponent} from './new-account.component';
 import {DashboardModule} from './dashboard.module'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AlertComponent} from "./alert.component";
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     declarations: [
         AppComponent,
         SignInComponent,
-        NewAccountComponent
+        NewAccountComponent,
+        AlertComponent
     ],
     bootstrap: [
         AppComponent
